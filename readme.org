@@ -1,1 +1,15 @@
-binn is a serialisation library from https://github.com/liteserver/binn
+This project operates a multithreaded file copy with progress
+reporting.  Although multithreading will not improve IO on PC
+hardware, on systems with multiple channels the ability to read and
+write in parallel could result in significant improvement.
+
+This program also outputs progress messages to stdout.  There are two
+messages, [1,ByteCount] represents a progress message, and
+[2,ByteCount] is a completion message.  The serialisation library is 
+the binn library from https://github.com/liteserver/binn
+
+I am considering putting in a delay thread also.  The idea is if this
+program is taking up too much resource, and other activities are
+suffering, to start another thread that grabs the read mutex and holds
+it for a per defined time, allowing other processes with file IO a
+bigger share of resource.
